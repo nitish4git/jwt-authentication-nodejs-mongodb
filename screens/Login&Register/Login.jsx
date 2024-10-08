@@ -16,6 +16,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = () => {
   const navigation = useNavigation();
   const [email , setEmail] = useState();
@@ -30,11 +31,13 @@ const Login = () => {
   const handleSubmit = async ()=>{
     const userData = {email , password}
     try {
-      const res = await axios.post("http://192.168.1.3:5000/api/login" , userData);
+      const res = await axios.post("http://192.168.1.8:5000/api/login" , userData);
       // console.log(res)
-      // console.log(res.data)
+      // console.log(res.data.token)
       if(res.data.status === "ok"){
         Alert.alert("Login Successfull");
+        const token = res.data.token
+        await AsyncStorage.setItem("token",token)
         navigation.navigate("home")
       }else{
         Alert.alert("Invalid email or password")

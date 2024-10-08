@@ -29,7 +29,7 @@ const Register = () => {
    const handleSubmit = async ()=>{
     const userData = {name , email , phone , password};
     try {
-      const res = await axios.post("http://192.168.1.3:5000/api/register" , userData);
+      const res = await axios.post("http://192.168.1.8:5000/api/register" , userData);
       if(res.data.status ==="ok"){
         Alert.alert("Acount created successfull");
         navigation.navigate('login')

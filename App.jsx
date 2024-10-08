@@ -5,15 +5,28 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screens/Login&Register/Login';
 import Register from './screens/Login&Register/Register';
 import Home from './screens/Home/Home';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Profile from './screens/Profile/Profile';
+const stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const Tabs = ()=>{
+  return(
+    <Tab.Navigator screenOptions={{headerShown:false}}>
+      <Tab.Screen name='homePage' component={Home}/>
+      <Tab.Screen name ='profilePage' component={Profile}/>
+    </Tab.Navigator>
+  )
+}
+
 
 const App = () => {
-  const stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <stack.Navigator screenOptions={{headerShown:false}}>
         <stack.Screen name='login' component={Login}/>
         <stack.Screen name="register" component={Register}/>
-        <stack.Screen name="home" component={Home}/>
+        <stack.Screen name='home' component={Tabs}/>
       </stack.Navigator>
     </NavigationContainer>
   )
